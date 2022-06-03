@@ -1,0 +1,48 @@
+
+#include<bits/stdc++.h>
+#include <iostream>
+
+using namespace std;
+int fun(vector<int> coins,int amount)
+{
+    if(amount==0)
+    {
+        return 0;
+    }
+    int ans=INT_MAX;
+    for(int coin:coins)
+    {
+        if((amount-coin)>=0)
+        {
+        ans=min(ans,fun(coins,amount-coin)+1);
+        }
+    }
+    return ans;
+}
+
+int mincoin(vector<int>coins,int amount)
+{
+   
+    int ans=fun(coins,amount);
+    return ans==INT_MAX?-1:ans;
+}
+
+int main()
+{
+    vector<int>coins;
+    int n;
+    cout<<"enter no of coins"<<" ";
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        int x;
+        cin>>x;
+        coins.push_back(x);
+    }
+    int amt;
+    cout<<"enter total amount"<<endl;
+    cin>>amt;
+    cout<<"minimum number of coins req is"<<"  "<<mincoin(coins,amt);
+
+    return 0;
+}
